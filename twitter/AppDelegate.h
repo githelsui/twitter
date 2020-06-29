@@ -2,13 +2,15 @@
 //  AppDelegate.h
 //  twitter
 //
-//  Created by Githel Lynn Suico on 6/29/20.
-//  Copyright © 2020 Githel Lynn Suico. All rights reserved.
+//  Created by emersonmalca on 5/28/18.
+//  Copyright © 2018 Emerson Malca. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (strong, nonatomic) UIWindow *window;
 
 
 @end
