@@ -51,7 +51,6 @@
         }
     }];
     [self refreshRetweet];
-    [self.delegate didTweet:self.tweet];
 }
 
 - (void)refreshFav{
@@ -70,16 +69,16 @@
 
 - (void)refreshRetweet{
     UIImage *retweetIcon;
-      if(self.tweet.retweeted){
-          retweetIcon = [UIImage imageNamed:@"retweet-icon-green.png"];
-          NSString *retweetCount = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
-          NSMutableAttributedString *attributedRetweet = [[NSMutableAttributedString alloc] initWithAttributedString:[ self.retweetButton attributedTitleForState:UIControlStateNormal]];
-          [attributedRetweet replaceCharactersInRange:NSMakeRange(0, attributedRetweet.length) withString:retweetCount];
-          [self.retweetButton setAttributedTitle:attributedRetweet forState:UIControlStateNormal];
-      } else {
-          retweetIcon = [UIImage imageNamed:@"retweet-icon.png"];
-      }
-      [self.retweetButton setImage:retweetIcon forState:UIControlStateNormal];
+    if(self.tweet.retweeted){
+        retweetIcon = [UIImage imageNamed:@"retweet-icon-green.png"];
+        NSString *retweetCount = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
+        NSMutableAttributedString *attributedRetweet = [[NSMutableAttributedString alloc] initWithAttributedString:[ self.retweetButton attributedTitleForState:UIControlStateNormal]];
+        [attributedRetweet replaceCharactersInRange:NSMakeRange(0, attributedRetweet.length) withString:retweetCount];
+        [self.retweetButton setAttributedTitle:attributedRetweet forState:UIControlStateNormal];
+    } else {
+        retweetIcon = [UIImage imageNamed:@"retweet-icon.png"];
+    }
+    [self.retweetButton setImage:retweetIcon forState:UIControlStateNormal];
 }
 
 @end

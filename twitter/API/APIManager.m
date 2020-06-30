@@ -79,7 +79,6 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
 }
 
 - (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
-    // "1.1/statuses/retweet/:id.json"
     NSString *baseURL = @"1.1/statuses/retweet/";
     NSString *tweetId = tweet.idStr;
     NSString *fileType = @".json";

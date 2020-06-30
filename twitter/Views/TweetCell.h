@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
 - (IBAction)didTapFavorite:(id)sender;
 - (void)refreshFav;
+- (void)refreshRetweet;
 
 @end
 

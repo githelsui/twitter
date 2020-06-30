@@ -11,7 +11,9 @@
 #import "UIImageView+AFNetworking.h"
 #import "TweetCell.h"
 #import "ComposeViewController.h"
+#import "LoginViewController.h"
 #import "Tweet.h"
+#import "AppDelegate.h"
 
 @interface TimelineViewController ()  <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -32,7 +34,7 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-//    [self.tableView addSubview:self.refreshControl];
+    //    [self.tableView addSubview:self.refreshControl];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,6 +92,7 @@
     [attributedRetweet replaceCharactersInRange:NSMakeRange(0, attributedRetweet.length) withString:retweets];
     [cell.retweetButton setAttributedTitle:attributedRetweet forState:UIControlStateNormal];
     [cell refreshFav];
+    [cell refreshRetweet];
     UIView *backgroundView = [[UIView alloc] init];
     backgroundView.backgroundColor = UIColor.whiteColor;
     cell.selectedBackgroundView = backgroundView;
@@ -102,6 +105,15 @@
     [self.tableView reloadData];
 }
 
+- (IBAction)logoutTapped:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -109,6 +121,7 @@
     UINavigationController *navigationController = [segue destinationViewController];
     ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
     composeController.delegate = self;
+    [[APIManager shared] logout];
 }
 
 
