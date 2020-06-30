@@ -130,6 +130,9 @@
                                                             </fragment>
                                                         </attributedString>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="retweetTapped:" destination="3bP-PA-sPy" eventType="touchUpInside" id="TAj-fk-irg"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cGG-7S-6hK">
                                                     <rect key="frame" x="221" y="146" width="89" height="28"/>

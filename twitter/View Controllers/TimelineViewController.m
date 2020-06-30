@@ -31,8 +31,8 @@
     [self fetchTweets];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:UIControlEventValueChanged];
-    //    [self.tableView insertSubview:self.refreshControl atIndex:0];
-    [self.tableView addSubview:self.refreshControl];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+//    [self.tableView addSubview:self.refreshControl];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,6 +72,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
+    cell.delegate = self;
     cell.tweet = tweet;
     cell.tweetLabel.text = tweet.text;
     cell.authorLabel.text = tweet.user.screenName;
@@ -84,7 +85,6 @@
     NSMutableAttributedString *attributedFav = [[NSMutableAttributedString alloc] initWithAttributedString:[ cell.favButton attributedTitleForState:UIControlStateNormal]];
     [attributedFav replaceCharactersInRange:NSMakeRange(0, attributedFav.length) withString:favCount];
     [cell.favButton setAttributedTitle:attributedFav forState:UIControlStateNormal];
-    NSLog(@"%s", "this runs");
     NSString *retweets = [NSString stringWithFormat:@"%d", tweet.retweetCount];
     NSMutableAttributedString *attributedRetweet = [[NSMutableAttributedString alloc] initWithAttributedString:[ cell.retweetButton attributedTitleForState:UIControlStateNormal]];
     [attributedRetweet replaceCharactersInRange:NSMakeRange(0, attributedRetweet.length) withString:retweets];
