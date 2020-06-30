@@ -19,6 +19,7 @@
 		6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790820BCC04D0085BC29 /* TimelineViewController.m */; };
 		CA6F979924AA7FEC0064FB34 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6F979824AA7FEC0064FB34 /* User.m */; };
 		CA6F979C24AA80E60064FB34 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6F979B24AA80E60064FB34 /* Tweet.m */; };
+		CA6F979F24AA861E0064FB34 /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6F979E24AA861E0064FB34 /* TweetCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,8 @@
 		CA6F979824AA7FEC0064FB34 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		CA6F979A24AA80E60064FB34 /* Tweet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
 		CA6F979B24AA80E60064FB34 /* Tweet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
+		CA6F979D24AA861E0064FB34 /* TweetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetCell.h; sourceTree = "<group>"; };
+		CA6F979E24AA861E0064FB34 /* TweetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,10 +98,12 @@
 				6AD278D820BC4B950085BC29 /* AppDelegate.h */,
 				6AD278D920BC4B950085BC29 /* AppDelegate.m */,
 				6AD278DE20BC4B950085BC29 /* Main.storyboard */,
-				6AD278E120BC4B970085BC29 /* Assets.xcassets */,
 				6AD278E320BC4B970085BC29 /* LaunchScreen.storyboard */,
 				6AD278E620BC4B970085BC29 /* Info.plist */,
 				6AD278E720BC4B970085BC29 /* main.m */,
+				CA6F979D24AA861E0064FB34 /* TweetCell.h */,
+				CA6F979E24AA861E0064FB34 /* TweetCell.m */,
+				6AD278E120BC4B970085BC29 /* Assets.xcassets */,
 			);
 			path = twitter;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA6F979F24AA861E0064FB34 /* TweetCell.m in Sources */,
 				6AD278F320BCA6020085BC29 /* BDBOAuth1SessionManager+SFAuthenticationSession.m in Sources */,
 				CA6F979924AA7FEC0064FB34 /* User.m in Sources */,
 				6AD278E820BC4B970085BC29 /* main.m in Sources */,
