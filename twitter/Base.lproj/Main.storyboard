@@ -213,6 +213,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="6w2-CM-LXH"/>
                         <barButtonItem key="rightBarButtonItem" image="edit-icon" id="8Ao-WG-UW9">
                             <connections>
+                                <action selector="composeTapped:" destination="Lbl-k5-U4i" id="Gbe-OK-lEF"/>
                                 <segue destination="yhg-EF-7vu" kind="presentation" id="iRc-jo-rhF"/>
                             </connections>
                         </barButtonItem>

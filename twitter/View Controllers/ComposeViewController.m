@@ -32,6 +32,7 @@
                                                              handler:^(UIAlertAction * _Nonnull action) {}];
             [alert addAction:okAction];
             [self presentViewController:alert animated:YES completion:nil];
+            [self.delegate didTweet:tweet];
         } else {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Post Tweet"
                                                                            message:@"Network Error"

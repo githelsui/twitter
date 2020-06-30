@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ComposeViewControllerDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ComposeViewController : UIViewController
+
+@property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
 
 @end
 
