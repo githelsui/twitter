@@ -72,6 +72,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
+    cell.tweet = tweet;
     cell.tweetLabel.text = tweet.text;
     cell.authorLabel.text = tweet.user.screenName;
     cell.usernameLabel.text = tweet.user.name;
@@ -79,7 +80,16 @@
     NSURL *posterURL = [NSURL URLWithString:tweet.user.profileImgURL];
     [cell.profileView setImageWithURL:posterURL];
     cell.profileView.layer.cornerRadius = 15;
-    NSLog(@"%s", "run");
+    NSString *favCount = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
+    NSMutableAttributedString *attributedFav = [[NSMutableAttributedString alloc] initWithAttributedString:[ cell.favButton attributedTitleForState:UIControlStateNormal]];
+    [attributedFav replaceCharactersInRange:NSMakeRange(0, attributedFav.length) withString:favCount];
+    [cell.favButton setAttributedTitle:attributedFav forState:UIControlStateNormal];
+    NSLog(@"%s", "this runs");
+    NSString *retweets = [NSString stringWithFormat:@"%d", tweet.retweetCount];
+    NSMutableAttributedString *attributedRetweet = [[NSMutableAttributedString alloc] initWithAttributedString:[ cell.retweetButton attributedTitleForState:UIControlStateNormal]];
+    [attributedRetweet replaceCharactersInRange:NSMakeRange(0, attributedRetweet.length) withString:retweets];
+    [cell.retweetButton setAttributedTitle:attributedRetweet forState:UIControlStateNormal];
+    [cell refreshFav];
     return cell;
 }
 
