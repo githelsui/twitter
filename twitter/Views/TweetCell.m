@@ -46,7 +46,7 @@
         [attributedFav replaceCharactersInRange:NSMakeRange(0, attributedFav.length) withString:favCount];
         [self.favButton setAttributedTitle:attributedFav forState:UIControlStateNormal];
     } else {
-        favIcon = [UIImage imageNamed:@"fav-icon.png"];
+        favIcon = [UIImage imageNamed:@"favor-icon.png"];
     }
     [self.favButton setImage:favIcon forState:UIControlStateNormal];
 }

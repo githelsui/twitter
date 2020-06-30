@@ -90,6 +90,9 @@
     [attributedRetweet replaceCharactersInRange:NSMakeRange(0, attributedRetweet.length) withString:retweets];
     [cell.retweetButton setAttributedTitle:attributedRetweet forState:UIControlStateNormal];
     [cell refreshFav];
+    UIView *backgroundView = [[UIView alloc] init];
+    backgroundView.backgroundColor = UIColor.whiteColor;
+    cell.selectedBackgroundView = backgroundView;
     return cell;
 }
 
