@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TweetCell.h"
 #import "Tweet.h"
+#import "ComposeViewControllerDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailViewController : UIViewController
 @property (nonatomic, strong) Tweet *tweet;
+@property (nonatomic, strong) TweetCell *cell;
+@property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -105,6 +105,17 @@
     [self.tableView reloadData];
 }
 
+- (void)didRetweet:(Tweet *)tweet{
+    [self.tweets addObject:tweet];
+    [self fetchTweets];
+    [self.tableView reloadData];
+}
+
+- (void)didFavorite:(Tweet *)tweet{
+    [self fetchTweets];
+    [self.tableView reloadData];
+}
+
 - (IBAction)logoutTapped:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
@@ -130,6 +141,7 @@
         NSLog(@"tweet being passes %@", tweet);
         DetailViewController *detailController = [segue destinationViewController];
         detailController.tweet = tweet;
+        detailController.delegate = self;
     }
 }
 

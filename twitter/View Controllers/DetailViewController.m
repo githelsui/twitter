@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "APIManager.h"
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *profileIcon;
@@ -26,7 +27,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setTweetInfo];
     [self updateFav];
     [self updateRetweet];
     // Do any additional setup after loading the view.
@@ -42,8 +42,17 @@
     self.dateLabel.text = self.tweet.originalDate;
     self.timeLabel.text = self.tweet.timeString;
     self.tweetLabel.text = self.tweet.text;
+    NSString *favCount = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
+    NSMutableAttributedString *attributedFav = [[NSMutableAttributedString alloc] initWithAttributedString:[ self.favButton attributedTitleForState:UIControlStateNormal]];
+    [attributedFav replaceCharactersInRange:NSMakeRange(0, attributedFav.length) withString:favCount];
+    [self.favButton setAttributedTitle:attributedFav forState:UIControlStateNormal];
+    [self.cell.favButton setAttributedTitle:attributedFav forState:UIControlStateNormal];
+    NSString *retweetCount = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
+    NSMutableAttributedString *attributedRetweet = [[NSMutableAttributedString alloc] initWithAttributedString:[ self.retweetButton attributedTitleForState:UIControlStateNormal]];
+    [attributedRetweet replaceCharactersInRange:NSMakeRange(0, attributedRetweet.length) withString:retweetCount];
+    [self.retweetButton setAttributedTitle:attributedRetweet forState:UIControlStateNormal];
+    [self.cell.retweetButton setAttributedTitle:attributedRetweet forState:UIControlStateNormal];
     [self checkRetweets];
-    
 }
 
 - (void)checkRetweets{
@@ -51,7 +60,7 @@
     if(retweets == 1){
         self.retweetLabel.text = [NSString stringWithFormat:@"%d Retweet", retweets];
     } else {
-        self.retweetLabel.text = [NSString stringWithFormat:@"%d Retweets", retweets];;
+        self.retweetLabel.text = [NSString stringWithFormat:@"%d Retweets", retweets];
     }
 }
 
@@ -59,36 +68,57 @@
     UIImage *favIcon;
     if(self.tweet.favorited){
         favIcon = [UIImage imageNamed:@"favor-icon-red.png"];
-        NSString *favCount = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
-        NSMutableAttributedString *attributedFav = [[NSMutableAttributedString alloc] initWithAttributedString:[ self.favButton attributedTitleForState:UIControlStateNormal]];
-        [attributedFav replaceCharactersInRange:NSMakeRange(0, attributedFav.length) withString:favCount];
-        [self.favButton setAttributedTitle:attributedFav forState:UIControlStateNormal];
     } else {
         favIcon = [UIImage imageNamed:@"favor-icon.png"];
     }
+    [self.cell.favButton setImage:favIcon forState:UIControlStateNormal];
     [self.favButton setImage:favIcon forState:UIControlStateNormal];
+    [self setTweetInfo];
 }
 
 - (void)updateRetweet{
     UIImage *retweetIcon;
     if(self.tweet.retweeted){
         retweetIcon = [UIImage imageNamed:@"retweet-icon-green.png"];
-        NSString *retweetCount = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
-        NSMutableAttributedString *attributedRetweet = [[NSMutableAttributedString alloc] initWithAttributedString:[ self.retweetButton attributedTitleForState:UIControlStateNormal]];
-        [attributedRetweet replaceCharactersInRange:NSMakeRange(0, attributedRetweet.length) withString:retweetCount];
-        [self.retweetButton setAttributedTitle:attributedRetweet forState:UIControlStateNormal];
     } else {
         retweetIcon = [UIImage imageNamed:@"retweet-icon.png"];
     }
+    [self.cell.retweetButton setImage:retweetIcon forState:UIControlStateNormal];
     [self.retweetButton setImage:retweetIcon forState:UIControlStateNormal];
+    [self.delegate didRetweet:self.tweet];
+    [self setTweetInfo];
 }
 
 - (IBAction)retweetTapped:(id)sender {
-    
+    NSLog(@"tweet that has been retweeted = %@", self.tweet);
+    self.tweet.retweeted = YES;
+    self.tweet.retweetCount += 1;
+    [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
+        if(error){
+            NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
+        }
+        else{
+            NSLog(@"Successfully retweeted the following Tweet: %@", tweet.text);
+        }
+    }];
+    [self updateRetweet];
+    [self setTweetInfo];
 }
 
 - (IBAction)favTapped:(id)sender {
-    
+    NSLog(@"tweet that has been liked = %@", self.tweet);
+    self.tweet.favorited = YES;
+    self.tweet.favoriteCount += 1;
+    [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+        if(error){
+            NSLog(@"Error faving tweet: %@", error.localizedDescription);
+        }
+        else{
+            NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
+        }
+    }];
+    [self updateFav];
+    [self setTweetInfo];
 }
 
 - (IBAction)replyTapped:(id)sender {

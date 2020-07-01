@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ComposeViewControllerDelegate 
 
 - (void)didTweet:(Tweet *)tweet;
+- (void)didRetweet:(Tweet *)tweet;
+- (void)didFavorite:(Tweet *)tweet;
+- (void)didReply:(Tweet *)tweet;
 
 @end
 

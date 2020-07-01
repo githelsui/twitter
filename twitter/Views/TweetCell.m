@@ -24,7 +24,6 @@
 }
 
 - (IBAction)didTapFavorite:(id)sender{
-    NSLog(@"tweet that has been liked = %@", self.tweet);
     self.tweet.favorited = YES;
     self.tweet.favoriteCount += 1;
     [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
