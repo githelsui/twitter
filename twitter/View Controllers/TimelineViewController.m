@@ -82,7 +82,7 @@
     cell.dateLabel.text = tweet.createdAtString;
     NSURL *posterURL = [NSURL URLWithString:tweet.user.profileImgURL];
     [cell.profileView setImageWithURL:posterURL];
-    cell.profileView.layer.cornerRadius = 15;
+    cell.profileView.layer.cornerRadius = 31;
     NSString *favCount = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
     NSMutableAttributedString *attributedFav = [[NSMutableAttributedString alloc] initWithAttributedString:[ cell.favButton attributedTitleForState:UIControlStateNormal]];
     [attributedFav replaceCharactersInRange:NSMakeRange(0, attributedFav.length) withString:favCount];
@@ -111,6 +111,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     appDelegate.window.rootViewController = loginViewController;
+    [[APIManager shared] logout];
 }
 
 
@@ -118,10 +119,13 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
-    [[APIManager shared] logout];
+    if ([segue.identifier isEqualToString:@"ComposeSegue"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"DetailsSegue"]) {
+        
+    }
 }
 
 
