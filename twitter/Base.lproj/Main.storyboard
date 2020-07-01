@@ -307,16 +307,25 @@
                                         <rect key="frame" x="40" y="8" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="reply-icon"/>
+                                        <connections>
+                                            <action selector="replyTapped:" destination="s8p-4P-oNO" eventType="touchUpInside" id="jic-PT-fie"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcQ-UD-aTv">
                                         <rect key="frame" x="155" y="8" width="32" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button" image="retweet-icon"/>
+                                        <connections>
+                                            <action selector="retweetTapped:" destination="s8p-4P-oNO" eventType="touchUpInside" id="axF-ew-3lF"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kD-Yh-LNf">
                                         <rect key="frame" x="272" y="7" width="29" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button" image="favor-icon"/>
+                                        <connections>
+                                            <action selector="favTapped:" destination="s8p-4P-oNO" eventType="touchUpInside" id="5pq-KA-s94"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fhM-sq-YzU">
                                         <rect key="frame" x="0.0" y="42" width="343" height="0.33333333333333331"/>
@@ -336,6 +345,17 @@
                         <viewLayoutGuide key="safeArea" id="9C6-75-0mT"/>
                     </view>
                     <navigationItem key="navigationItem" id="VgN-yW-igH"/>
+                    <connections>
+                        <outlet property="authorLabel" destination="1Lj-zX-Kgw" id="VO5-Lb-PtO"/>
+                        <outlet property="dateLabel" destination="7ji-wA-seH" id="GBD-ad-oz6"/>
+                        <outlet property="favButton" destination="3kD-Yh-LNf" id="KoC-Xz-InB"/>
+                        <outlet property="profileIcon" destination="hJs-ce-VNl" id="sUV-Im-jQ6"/>
+                        <outlet property="retweetButton" destination="JcQ-UD-aTv" id="Bl2-LS-jaO"/>
+                        <outlet property="retweetLabel" destination="Y7m-A7-278" id="kn3-jJ-zpe"/>
+                        <outlet property="timeLabel" destination="KhP-Pn-efw" id="lbs-OP-jcs"/>
+                        <outlet property="tweetLabel" destination="8tU-gd-O4i" id="xJX-dl-Ufi"/>
+                        <outlet property="usernameLabel" destination="gF1-zo-MtE" id="fa8-gJ-40c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="URL-21-eSO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,6 +13,7 @@
 #import "ComposeViewController.h"
 #import "LoginViewController.h"
 #import "Tweet.h"
+#import "DetailViewController.h"
 #import "AppDelegate.h"
 
 @interface TimelineViewController ()  <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
@@ -34,7 +35,6 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-    //    [self.tableView addSubview:self.refreshControl];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -123,8 +123,13 @@
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
-    } else if ([segue.identifier isEqualToString:@"DetailsSegue"]) {
-        
+    } else if ([segue.identifier isEqualToString:@"DetailSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Tweet *tweet = self.tweets[indexPath.row];
+        NSLog(@"tweet being passes %@", tweet);
+        DetailViewController *detailController = [segue destinationViewController];
+        detailController.tweet = tweet;
     }
 }
 
