@@ -9,17 +9,17 @@
 #import "DetailViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
+#import "ReplyViewController.h"
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *profileIcon;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UITextView *tweetLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *retweetLabel;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *favButton;
+@property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
 
 @end
 
@@ -38,9 +38,8 @@
     [self.profileIcon setImageWithURL:iconURL];
     self.profileIcon.layer.cornerRadius = 10;
     self.authorLabel.text = self.tweet.user.screenName;
-    self.usernameLabel.text = self.tweet.user.name;
+    self.usernameLabel.text = [NSString stringWithFormat:@"@%@", self.tweet.user.screenName];
     self.dateLabel.text = self.tweet.originalDate;
-    self.timeLabel.text = self.tweet.timeString;
     self.tweetLabel.text = self.tweet.text;
     NSString *favCount = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
     NSMutableAttributedString *attributedFav = [[NSMutableAttributedString alloc] initWithAttributedString:[ self.favButton attributedTitleForState:UIControlStateNormal]];
@@ -96,8 +95,7 @@
     [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
         if(error){
             NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
-        }
-        else{
+        } else {
             NSLog(@"Successfully retweeted the following Tweet: %@", tweet.text);
         }
     }];
@@ -112,8 +110,7 @@
     [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
         if(error){
             NSLog(@"Error faving tweet: %@", error.localizedDescription);
-        }
-        else{
+        } else {
             NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
         }
     }];
@@ -122,18 +119,30 @@
 }
 
 - (IBAction)replyTapped:(id)sender {
-    
+    UIImage *replyIcon;
+    if(self.tweet.replied){
+        replyIcon = [UIImage imageNamed:@"favor-icon-red.png"];
+    } else {
+        replyIcon = [UIImage imageNamed:@"favor-icon.png"];
+    }
+    [self.cell.favButton setImage:replyIcon forState:UIControlStateNormal];
+    [self.favButton setImage:replyIcon forState:UIControlStateNormal];
+    [self setTweetInfo];
 }
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ReplySegue"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ReplyViewController *replyController = (ReplyViewController*)navigationController.topViewController;
+        replyController.delegate = self.delegate;
+        replyController.tweet = self.tweet;
+        replyController.currentUser = self.currentUser;
+    }
+}
+
 
 @end

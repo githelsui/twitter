@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DetailViewController : UIViewController
 @property (nonatomic, strong) Tweet *tweet;
 @property (nonatomic, strong) TweetCell *cell;
+@property (nonatomic, strong) User *currentUser;
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
 @end
 

@@ -22,4 +22,8 @@
 
 - (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 
+- (void)getCurrentUser:(void(^) (User *user, NSError *error) )completion;
+
+- (void)reply:(NSString *)text replyId:(NSString *)idString completion:(void(^) (Tweet *, NSError *))completion;
+
 @end

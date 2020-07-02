@@ -29,8 +29,7 @@
     [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
         if(error){
             NSLog(@"Error faving tweet: %@", error.localizedDescription);
-        }
-        else{
+        } else {
             NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
         }
     }];
@@ -44,8 +43,7 @@
     [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
         if(error){
             NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
-        }
-        else{
+        } else {
             NSLog(@"Successfully retweeted the following Tweet: %@", tweet.text);
         }
     }];

@@ -9,9 +9,13 @@
 #import "ComposeViewController.h"
 #import "Tweet.h"
 #import "APIManager.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *tweetView;
+@property (weak, nonatomic) IBOutlet UILabel *authorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (nonatomic, strong) NSString *tweet;
 @end
 
@@ -19,6 +23,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUpHandle];
+}
+
+- (void)setUpHandle{
+    self.authorLabel.text = self.currentUser.name;
+    self.usernameLabel.text = [NSString stringWithFormat:@"@%@", self.currentUser.screenName];
+    NSURL *posterURL = [NSURL URLWithString:self.currentUser.profileImgURL];
+    [self.iconView setImageWithURL:posterURL];
 }
 
 - (void) postTweet{

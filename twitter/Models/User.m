@@ -22,7 +22,16 @@
         NSLog(@"%@", fullURL);
         self.profileImgURL = fullURL;
     }
-return self;
+    return self;
 }
-    
+
++ (NSMutableArray *)usersWithArray:(NSArray *)dictionaries{
+    NSMutableArray *users = [NSMutableArray array];
+    for (NSDictionary *dictionary in dictionaries) {
+        User *user = [[User alloc] initWithDictionary:dictionary];
+        [users addObject:user];
+    }
+    return users;
+}
+
 @end

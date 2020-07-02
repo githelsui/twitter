@@ -31,8 +31,7 @@
         self.favorited = [dictionary[@"favorited"] boolValue];
         self.retweetCount = [dictionary[@"retweet_count"] intValue];
         self.retweeted = [dictionary[@"retweeted"] boolValue];
-        
-        // initialize user
+        self.replied = NO;
         NSDictionary *user = dictionary[@"user"];
         self.user = [[User alloc] initWithDictionary:user];
         
@@ -44,7 +43,7 @@
         formatter.dateStyle = NSDateFormatterShortStyle;
         formatter.timeStyle = NSDateFormatterShortStyle;
         self.originalDate = [formatter stringFromDate:date];
-        formatter.dateFormat = @"hh:mm";
+        formatter.dateFormat = @"hh:mm Z y";
         self.timeString = [formatter stringFromDate:date];
         NSTimeInterval seconds = -[date timeIntervalSinceNow];
         NSDate *timeAgo = [NSDate dateWithTimeIntervalSinceNow:seconds];

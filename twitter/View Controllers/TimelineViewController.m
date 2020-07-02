@@ -14,6 +14,7 @@
 #import "LoginViewController.h"
 #import "Tweet.h"
 #import "DetailViewController.h"
+#import "ReplyViewController.h"
 #import "AppDelegate.h"
 
 @interface TimelineViewController ()  <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) User *currentUser;
 
 @end
 
@@ -28,17 +30,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self fetchTweets];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
+    [self fetchCurrentUser];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void) fetchCurrentUser{
+    [[APIManager shared] getCurrentUser:(^ (User *user, NSError *error) {
+        if (user) {
+            self.currentUser = user;
+        } else {
+            NSLog(@"😫😫😫 Error getting current user: %@", error.localizedDescription);
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Network Failure"
+                                                                           message:@"Cannot Load Tweets"
+                                                                    preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * _Nonnull action) {}];
+            [alert addAction:okAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    })];
 }
 
 - (void) fetchTweets{
@@ -64,7 +85,6 @@
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
     }];
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -77,8 +97,8 @@
     cell.delegate = self;
     cell.tweet = tweet;
     cell.tweetLabel.text = tweet.text;
-    cell.authorLabel.text = tweet.user.screenName;
-    cell.usernameLabel.text = tweet.user.name;
+    cell.authorLabel.text = tweet.user.name;
+    cell.usernameLabel.text =  [NSString stringWithFormat:@"@%@", tweet.user.screenName];
     cell.dateLabel.text = tweet.createdAtString;
     NSURL *posterURL = [NSURL URLWithString:tweet.user.profileImgURL];
     [cell.profileView setImageWithURL:posterURL];
@@ -116,9 +136,14 @@
     [self.tableView reloadData];
 }
 
+- (void)didReply:(Tweet *)tweet{
+    [self.tweets addObject:tweet];
+    [self fetchTweets];
+    [self.tableView reloadData];
+}
+
 - (IBAction)logoutTapped:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     appDelegate.window.rootViewController = loginViewController;
@@ -134,6 +159,7 @@
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
+        composeController.currentUser = self.currentUser;
     } else if ([segue.identifier isEqualToString:@"DetailSegue"]) {
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
@@ -142,8 +168,8 @@
         DetailViewController *detailController = [segue destinationViewController];
         detailController.tweet = tweet;
         detailController.delegate = self;
+        detailController.currentUser = self.currentUser;
     }
 }
-
 
 @end
