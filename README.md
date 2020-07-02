@@ -51,7 +51,7 @@ Here's a walkthrough of implemented user stories:<br />
 <img src="gif1.gif" width="250" height="497"/>
 <img src="gif2.gif" width="250" height="497"/>
 <img src="gif3.gif" width="250" height="479"/>
-<img src="gif4.gif" width="520" height="250"/>
+<img src="gif6.gif" width="520" height="250"/>
 <img src="gif5.gif" width="250" height="497"/>
 
 ## Notes
