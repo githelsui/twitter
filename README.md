@@ -2,7 +2,7 @@
 
 **Twitter Client** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
-Time spent: **X** hours spent in total
+Time spent: 12 hours spent in total
 
 ## User Stories
 
@@ -16,9 +16,9 @@ The following **required** functionality is completed:
 - [x] User can pull to refresh.
 - [x] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet.
 - [x] User can compose a new tweet by tapping on a compose button.
-- [ ] Using AutoLayout, the Tweet cell should adjust its layout for iPhone 11, Pro and SE device sizes as well as accommodate device rotation.
+- [x] Using AutoLayout, the Tweet cell should adjust its layout for iPhone 11, Pro and SE device sizes as well as accommodate device rotation.
 - [x] User should display the relative timestamp for each tweet "8m", "7h"
-- [ ] Tweet Details Page: User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
+- [x] Tweet Details Page: User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
 
 The following **stretch** features are implemented:
 
@@ -34,38 +34,46 @@ The following **stretch** features are implemented:
 - [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 - [ ] When composing, you should have a countdown for the number of characters remaining for the tweet (out of 280) (**1 point**)
 - [x] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
-- [ ] User can reply to any tweet, and replies should be prefixed with the username and the reply_id should be set when posting the tweet (**2 points**)
+- [x] User can reply to any tweet, and replies should be prefixed with the username and the reply_id should be set when posting the tweet (**2 points**)
 - [ ] User sees embedded images in tweet if available
 - [ ] User can switch between timeline, mentions, or profile view through a tab bar (**3 points**)
 - [ ] Profile Page: pulling down the profile page should blur and resize the header image. (**4 points**)
 
-
-The following **additional** features are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality!
-
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Auto-layout Tips
+2. Utilizing Protocols and Delegates
+3. Block statements and utilizing them in our API calls
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
-
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+Here's a walkthrough of implemented user stories:<br />
+<img src="gif1.gif" width="250" height="497"/>
+<img src="gif2.gif" width="250" height="497"/>
+<img src="gif3.gif" width="250" height="479"/>
+<img src="gif4.gif" width="520" height="250"/>
+<img src="gif5.gif" width="250" height="497"/>
 
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+- Autolayout can be extremely unpredictable, therefore it was difficult getting my views to look the way I wanted when applying auto-layout
+- Using protocols and delegates to update a view that I segued away from
+- Using different API endpoints properly (what exact URL to use and what return value I'm receiving). This was hard when I was attempting to get my current user back and posting a reply
+- Utilizing the POST methods of the API (tweet and reply)
+- Wiring up my actions (favorite, retweet, reply) to save and reload with the same values in the interface
+- Spent most of my time trying to configure the changes made on the Details page to reappear on the Timeline
+- Received Network errors as a result of making too many calls at once, so I often would have to take breaks
+
 
 ## Credits
 
 List an 3rd party libraries, icons, graphics, or other assets you used in your app.
 
 - [AFNetworking](https://github.com/AFNetworking/AFNetworking) - networking task library
+- [BDBOAuth1Manager]
+- [DateTools]
 
 ## License
 
