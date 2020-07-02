@@ -89,7 +89,6 @@
 }
 
 - (IBAction)retweetTapped:(id)sender {
-    NSLog(@"tweet that has been retweeted = %@", self.tweet);
     self.tweet.retweeted = YES;
     self.tweet.retweetCount += 1;
     [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
@@ -104,7 +103,6 @@
 }
 
 - (IBAction)favTapped:(id)sender {
-    NSLog(@"tweet that has been liked = %@", self.tweet);
     self.tweet.favorited = YES;
     self.tweet.favoriteCount += 1;
     [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
