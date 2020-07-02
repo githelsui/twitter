@@ -47,9 +47,8 @@
         self.timeString = [formatter stringFromDate:date];
         NSTimeInterval seconds = -[date timeIntervalSinceNow];
         NSDate *timeAgo = [NSDate dateWithTimeIntervalSinceNow:seconds];
-        NSString *timeAgoString = timeAgo.timeAgoSinceNow;
+        NSString *timeAgoString = timeAgo.shortTimeAgoSinceNow;
         self.createdAtString = timeAgoString;
-        NSLog(@"Time Ago: %@", timeAgo.timeAgoSinceNow);
     }
     return self;
 }        
