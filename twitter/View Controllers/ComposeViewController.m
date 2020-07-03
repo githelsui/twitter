@@ -11,11 +11,12 @@
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface ComposeViewController ()
+@interface ComposeViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *tweetView;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *countLabel;
 @property (nonatomic, strong) NSString *tweet;
 @end
 
@@ -23,7 +24,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tweetView.delegate = self;
     [self setUpHandle];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    int characterLimit = 140;
+    NSString *newText = [self.tweetView.text stringByReplacingCharactersInRange:range withString:text];
+    self.countLabel.title = [NSString stringWithFormat:@"%lu", (unsigned long)newText.length];
+    return newText.length < characterLimit;
 }
 
 - (void)setUpHandle{

@@ -404,14 +404,18 @@
                                 <action selector="closeTapped:" destination="ne4-t4-EgF" id="oJf-3S-e1P"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="4bK-tW-c76">
-                            <connections>
-                                <action selector="tweetTapped:" destination="ne4-t4-EgF" id="Bfl-Z1-zlE"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Tweet" id="4bK-tW-c76">
+                                <connections>
+                                    <action selector="tweetTapped:" destination="ne4-t4-EgF" id="Bfl-Z1-zlE"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem enabled="NO" title="0" id="sWy-in-HPU"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="authorLabel" destination="3Hh-Ye-vwf" id="kSD-T4-AUF"/>
+                        <outlet property="countLabel" destination="sWy-in-HPU" id="3Sg-Xq-xsL"/>
                         <outlet property="iconView" destination="NeB-EW-a9D" id="GKz-UN-0DI"/>
                         <outlet property="replyingTo" destination="oa3-lc-Nj5" id="EZW-aE-2YX"/>
                         <outlet property="tweetView" destination="vvv-Qd-cd3" id="pHD-Ff-9gd"/>
@@ -465,14 +469,18 @@
                                 <action selector="closeTapped:" destination="B0e-KZ-jvf" id="KZx-U2-J2Z"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="St0-hj-gTF">
-                            <connections>
-                                <action selector="tweetTapped:" destination="B0e-KZ-jvf" id="fVE-4P-PeU"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Tweet" id="St0-hj-gTF">
+                                <connections>
+                                    <action selector="tweetTapped:" destination="B0e-KZ-jvf" id="fVE-4P-PeU"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem enabled="NO" title="0" id="cS7-o6-5XX"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="authorLabel" destination="9Mr-mB-BFJ" id="Zuo-a7-VJx"/>
+                        <outlet property="countLabel" destination="cS7-o6-5XX" id="Z7y-1W-9D3"/>
                         <outlet property="iconView" destination="jHl-kK-Koc" id="rTf-Cg-Lsd"/>
                         <outlet property="tweetView" destination="MMp-uv-C3x" id="ido-Qa-zjf"/>
                         <outlet property="usernameLabel" destination="eHS-ck-3cz" id="hg8-vf-871"/>

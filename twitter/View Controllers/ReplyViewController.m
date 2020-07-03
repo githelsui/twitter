@@ -12,11 +12,12 @@
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface ReplyViewController ()
+@interface ReplyViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (weak, nonatomic) IBOutlet UILabel *replyingTo;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UITextView *tweetView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *countLabel;
 @property (nonatomic, strong) NSString *reply;
 @end
 
@@ -25,7 +26,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpHandle];
+    self.tweetView.delegate = self;
     // Do any additional setup after loading the view.
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    int characterLimit = 140;
+    NSString *newText = [self.tweetView.text stringByReplacingCharactersInRange:range withString:text];
+    self.countLabel.title = [NSString stringWithFormat:@"%lu", (unsigned long)newText.length];
+    return newText.length < characterLimit;
 }
 
 - (void)setUpHandle{
