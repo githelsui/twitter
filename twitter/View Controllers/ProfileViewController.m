@@ -34,19 +34,17 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    [self fetchTweets];
     [self fetchCurrentUser];
-    NSLog(@"%@", self.currentUser);
-    //    [self setHeader];
 }
 
 - (void) setHeader{
     NSURL *icon = [NSURL URLWithString:self.currentUser.profileImgURL];
     [self.iconView setImageWithURL:icon];
+    self.iconView.layer.cornerRadius = 35;
     NSURL *header = [NSURL URLWithString:self.currentUser.headerURL];
     [self.headerView setImageWithURL:header];
     self.authorLabel.text = self.currentUser.name;
-    self.usernameLabel.text = self.currentUser.screenName;
+    self.usernameLabel.text = [NSString stringWithFormat:@"@%@", self.currentUser.screenName];
     self.bioLabel.text = self.currentUser.bio;
     self.tweetLabel.text = [NSString stringWithFormat:@"%@ Tweets", self.currentUser.tweetCount];
     self.followersLabel.text = [NSString stringWithFormat:@"%@ Followers", self.currentUser.followerCount];
@@ -57,6 +55,8 @@
     [[APIManager shared] getCurrentUser:(^ (User *user, NSError *error) {
         if (user) {
             self.currentUser = user;
+            [self setHeader];
+            [self fetchTweets];
         } else {
             NSLog(@"😫😫😫 Error getting current user: %@", error.localizedDescription);
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Network Failure"
@@ -72,7 +72,7 @@
 }
 
 - (void) fetchTweets{
-    [[APIManager shared] getHomeTimelineWithCompletion:^(NSMutableArray *tweets, NSError *error) {
+    [[APIManager shared] getUserTimeline:self.currentUser completion:^(NSMutableArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             self.tweets = tweets;

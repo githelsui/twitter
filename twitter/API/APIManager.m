@@ -69,7 +69,6 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
 - (void)getCurrentUser:(void(^) (User *user, NSError *error) )completion {
     [self GET:@"1.1/account/verify_credentials.json"
    parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable userDictionary) {
-        NSLog(@"%@", userDictionary);
         User *user  = [[User alloc] initWithDictionary:userDictionary];
         completion(user, nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -98,6 +97,18 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
         Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
         completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+- (void)getUserTimeline:(User *)user completion:(void(^) (NSMutableArray *tweets, NSError *error) )completion {
+    NSString *urlString = @"1.1/statuses/user_timeline.json?";
+    NSString *screenName = [NSString stringWithFormat:@"screen_name=%@", user.screenName];
+    NSString *finalURL = [urlString stringByAppendingString:screenName];
+    [self GET:finalURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
+        NSMutableArray *tweets  = [Tweet tweetsWithArray:tweetDictionaries];
+        completion(tweets, nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         completion(nil, error);
     }];

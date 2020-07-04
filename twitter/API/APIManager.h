@@ -26,6 +26,8 @@
 
 - (void)getCurrentUser:(void(^) (User *user, NSError *error) )completion;
 
+- (void)getUserTimeline:(User *)user completion:(void(^) (NSMutableArray *tweets, NSError *error) )completion;
+
 - (void)reply:(NSString *)text replyId:(NSString *)idString completion:(void(^) (Tweet *, NSError *))completion;
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "User.h"
+#import "Tweet.h"
+#import "APIManager.h"
 
 @implementation User
 
@@ -19,10 +21,10 @@
         NSString *fileType = @".jpg";
         NSString *baseURL = [imgURL substringToIndex:[imgURL length] - 11];
         NSString *fullURL = [baseURL stringByAppendingString:fileType];
-        NSLog(@"%@", fullURL);
         self.profileImgURL = fullURL;
         self.bio = dictionary[@"description"];
         self.headerURL = dictionary[@"profile_banner_url"];
+        NSLog(@"header URL = %@", self.headerURL);
         self.tweetCount = [NSString stringWithFormat:@"%@", dictionary[@"statuses_count"]];
         self.followerCount = [NSString stringWithFormat:@"%@", dictionary[@"followers_count"]];
         self.followingCount = [NSString stringWithFormat:@"%@", dictionary[@"friends_count"]];
