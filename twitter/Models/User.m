@@ -21,6 +21,11 @@
         NSString *fullURL = [baseURL stringByAppendingString:fileType];
         NSLog(@"%@", fullURL);
         self.profileImgURL = fullURL;
+        self.bio = dictionary[@"description"];
+        self.headerURL = dictionary[@"profile_banner_url"];
+        self.tweetCount = [NSString stringWithFormat:@"%@", dictionary[@"statuses_count"]];
+        self.followerCount = [NSString stringWithFormat:@"%@", dictionary[@"followers_count"]];
+        self.followingCount = [NSString stringWithFormat:@"%@", dictionary[@"friends_count"]];
     }
     return self;
 }

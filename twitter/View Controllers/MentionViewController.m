@@ -10,10 +10,12 @@
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
 #import "TweetCell.h"
+#import "DetailViewController.h"
 
 @interface MentionViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *tweets;
+@property (nonatomic, strong) User *currentUser;
 @end
 
 @implementation MentionViewController
@@ -24,6 +26,24 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self fetchMentions];
+}
+
+- (void) fetchCurrentUser{
+    [[APIManager shared] getCurrentUser:(^ (User *user, NSError *error) {
+        if (user) {
+            self.currentUser = user;
+        } else {
+            NSLog(@"😫😫😫 Error getting current user: %@", error.localizedDescription);
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Network Failure"
+                                                                           message:@"Cannot Load Tweets"
+                                                                    preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * _Nonnull action) {}];
+            [alert addAction:okAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    })];
 }
 
 - (void)fetchMentions{
@@ -80,14 +100,19 @@
     cell.selectedBackgroundView = backgroundView;
     return cell;
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UITableViewCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    Tweet *tweet = self.tweets[indexPath.row];
+    NSLog(@"tweet being passes %@", tweet);
+    DetailViewController *detailController = [segue destinationViewController];
+    detailController.tweet = tweet;
+    detailController.currentUser = self.currentUser;
+}
+
 
 @end

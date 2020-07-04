@@ -7,9 +7,9 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "09766CC7-A556-4630-BD38-7A6D8CBDEDB0"
+            uuid = "0AE15D77-552C-42CF-A1FC-F2E4DDAF1840"
             shouldBeEnabled = "Yes"
-            condition = "Receiver (&lt;LoginViewController: 0x7fe15b40c790&gt;) "
+            condition = "&lt;ProfileViewController 0x7f8f7a80a650&gt; setValue:forUndefinedKey:"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             breakpointStackSelectionBehavior = "1"
