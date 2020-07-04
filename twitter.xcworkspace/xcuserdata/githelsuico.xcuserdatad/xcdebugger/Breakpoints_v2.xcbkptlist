@@ -3,4 +3,19 @@
    uuid = "22FD95FF-2908-4BD6-889B-58D986566EF6"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            uuid = "09766CC7-A556-4630-BD38-7A6D8CBDEDB0"
+            shouldBeEnabled = "Yes"
+            condition = "Receiver (&lt;LoginViewController: 0x7fe15b40c790&gt;) "
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            breakpointStackSelectionBehavior = "1"
+            scope = "1"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

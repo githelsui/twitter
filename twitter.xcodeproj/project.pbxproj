@@ -19,6 +19,7 @@
 		6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790820BCC04D0085BC29 /* TimelineViewController.m */; };
 		CA058C7424AC0B4F00F0DA9B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA058C7324AC0B4F00F0DA9B /* DetailViewController.m */; };
 		CA3B181F24AD0554007E66DA /* ReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3B181E24AD0554007E66DA /* ReplyViewController.m */; };
+		CA56AC7524AFD8BB00AA8742 /* MentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56AC7424AFD8BB00AA8742 /* MentionViewController.m */; };
 		CA6F979924AA7FEC0064FB34 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6F979824AA7FEC0064FB34 /* User.m */; };
 		CA6F979C24AA80E60064FB34 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6F979B24AA80E60064FB34 /* Tweet.m */; };
 		CA6F979F24AA861E0064FB34 /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6F979E24AA861E0064FB34 /* TweetCell.m */; };
@@ -50,6 +51,8 @@
 		CA058C7324AC0B4F00F0DA9B /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		CA3B181D24AD0554007E66DA /* ReplyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReplyViewController.h; sourceTree = "<group>"; };
 		CA3B181E24AD0554007E66DA /* ReplyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReplyViewController.m; sourceTree = "<group>"; };
+		CA56AC7324AFD8BB00AA8742 /* MentionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MentionViewController.h; sourceTree = "<group>"; };
+		CA56AC7424AFD8BB00AA8742 /* MentionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MentionViewController.m; sourceTree = "<group>"; };
 		CA6F979724AA7FEC0064FB34 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CA6F979824AA7FEC0064FB34 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		CA6F979A24AA80E60064FB34 /* Tweet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 				CA058C7324AC0B4F00F0DA9B /* DetailViewController.m */,
 				CA3B181D24AD0554007E66DA /* ReplyViewController.h */,
 				CA3B181E24AD0554007E66DA /* ReplyViewController.m */,
+				CA56AC7324AFD8BB00AA8742 /* MentionViewController.h */,
+				CA56AC7424AFD8BB00AA8742 /* MentionViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA56AC7524AFD8BB00AA8742 /* MentionViewController.m in Sources */,
 				CA6F979F24AA861E0064FB34 /* TweetCell.m in Sources */,
 				6AD278F320BCA6020085BC29 /* BDBOAuth1SessionManager+SFAuthenticationSession.m in Sources */,
 				CA6F979924AA7FEC0064FB34 /* User.m in Sources */,

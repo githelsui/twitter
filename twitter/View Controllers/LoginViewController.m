@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "APIManager.h"
+#import "AppDelegate.h"
+#import "TimelineViewController.h"
 
 @interface LoginViewController ()
 
@@ -17,6 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"%s","what");
     // Do any additional setup after loading the view.
 }
 
@@ -29,6 +32,9 @@
     [[APIManager shared] loginWithCompletion:^(BOOL success, NSError *error) {
         if (success) {
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"TweetsNavigationController"];
+            [[[[UIApplication sharedApplication] delegate] window] setRootViewController:vc];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
